@@ -19,8 +19,8 @@ airflow.db
 webserver_config.py
 
 # Dados gerados pelo pipeline
-/dados/*
-!/dados/.gitkeep
+#/dados/*
+#!/dados/.gitkeep
 
 # Arquivos temporários
 *.log
