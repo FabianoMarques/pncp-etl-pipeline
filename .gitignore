@@ -1,0 +1,38 @@
+# Credenciais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Airflow
+logs/
+airflow.cfg
+airflow.db
+webserver_config.py
+
+# Dados gerados pelo pipeline
+/dados/*
+!/dados/.gitkeep
+
+# Arquivos temporários
+*.log
+*.tmp
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+docker-compose.yaml.txt
