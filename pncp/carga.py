@@ -499,34 +499,22 @@ def executar_carga(periodo_inicio, periodo_fim):
         print("Carga concluída com sucesso!")
 
     except Exception as erro:
-
-        # Desfaz as operações da carga
-        conexao.rollback()
-
         print(f"Erro durante a carga: {erro}")
 
-        # Registra a falha em uma transação separada
+        conexao.rollback()
+
         if coleta_id is not None:
-
             try:
-
-                registrar_erro_coleta(
-                    conexao,
-                    coleta_id
-                )
-
-                conexao.commit()
-
-                print("Falha registrada no histórico de coletas.")
-
+                conexao_erro = conectar_banco()
+                registrar_erro_coleta(conexao_erro, coleta_id)
+                conexao_erro.commit()
+                conexao_erro.close()
             except Exception as erro_registro:
+                print(f"Erro ao registrar falha da coleta: {erro_registro}")
 
-                conexao.rollback()
-
-                print(f"Erro ao registrar falha: {erro_registro}")
+        raise
 
     finally:
-
         conexao.close()
 
 
