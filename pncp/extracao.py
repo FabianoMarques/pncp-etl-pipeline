@@ -332,6 +332,10 @@ def extrair_atas(
             if total_paginas is None and len(itens) < tamanho_pagina:
                 break
 
+            # Encerra se o limite máximo de páginas foi atingido.
+            if max_paginas is not None and pagina >= max_paginas:
+                break
+
             # Aguarda antes de realizar a próxima requisição.
             time.sleep(INTERVALO_REQUISICOES)
 

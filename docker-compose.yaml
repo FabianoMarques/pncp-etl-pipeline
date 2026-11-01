@@ -84,6 +84,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/pncp:/opt/airflow/pncp:ro
     - ${AIRFLOW_PROJ_DIR:-.}/dados:/opt/airflow/dados
+    - ${AIRFLOW_PROJ_DIR:-.}/testes:/opt/airflow/testes:ro
     - D:/xampp/htdocs/clickhouse_etl_airflow:/opt/airflow/clickhouse_etl:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
