@@ -92,18 +92,20 @@ def finalizar_coleta(conexao, coleta_id, quantidade_atas):
         ))
 
 
-def registrar_erro_coleta(conexao, coleta_id):
+def registrar_erro_coleta(conexao_erro, coleta_id, erro):
 
-    with conexao.cursor() as cursor:
+    with conexao_erro.cursor() as cursor:
 
         cursor.execute("""
             UPDATE pncp_coletas
             SET
                 status = 'ERRO',
-                data_fim = %s
+                data_fim = %s,
+                mensagem_erro = %s
             WHERE id = %s
         """, (
             datetime.now(timezone.utc),
+            str(erro),
             coleta_id
         ))
 
@@ -504,13 +506,28 @@ def executar_carga(periodo_inicio, periodo_fim):
         conexao.rollback()
 
         if coleta_id is not None:
+            conexao_erro = None
+
             try:
                 conexao_erro = conectar_banco()
-                registrar_erro_coleta(conexao_erro, coleta_id)
+
+                registrar_erro_coleta(
+                    conexao_erro,
+                    coleta_id,
+                    erro
+                )
+
                 conexao_erro.commit()
-                conexao_erro.close()
+
             except Exception as erro_registro:
+                if conexao_erro is not None:
+                    conexao_erro.rollback()
+
                 print(f"Erro ao registrar falha da coleta: {erro_registro}")
+
+            finally:
+                if conexao_erro is not None:
+                    conexao_erro.close()
 
         raise
 

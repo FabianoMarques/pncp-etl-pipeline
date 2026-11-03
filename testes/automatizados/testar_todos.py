@@ -1,10 +1,12 @@
 import unittest
+from pathlib import Path
 
 if __name__ == "__main__":
+    diretorio_testes = Path(__file__).parent
+
     suite = unittest.defaultTestLoader.discover(
-        start_dir=".",
-        pattern="testar_*.py",
-        top_level_dir="."
+        start_dir=str(diretorio_testes),
+        pattern="testar_*.py"
     )
 
     resultado = unittest.TextTestRunner(

@@ -9,7 +9,7 @@ from pncp.exportacao import exportar_json
 import json
 from pncp.extracao import extrair_dados_complementares
 from pncp.transformacao import criar_dataframes
-from pncp.validacao import validar_dataframes
+from pncp.validacao import validar_dataframes, gerar_relatorio_ausencias
 from pncp.carga import executar_carga
 
 CAMINHO_DADOS = Path("/opt/airflow/dados")
@@ -147,9 +147,19 @@ def dag_pncp():
         df_atas, df_itens, df_resultados = criar_dataframes(dados)
 
         resultado = validar_dataframes(
-            df_atas,
-            df_itens,
-            df_resultados
+        df_atas,
+        df_itens,
+        df_resultados
+        )
+
+        gerar_relatorio_ausencias(
+            {
+                "df_atas": df_atas,
+                "df_itens": df_itens,
+                "df_resultados": df_resultados,
+            },
+            arquivo_origem=caminho_json,
+            caminho_saida=str(CAMINHO_DADOS / "relatorio_qualidade_pncp.csv"),
         )
 
         print("Resultado da validação:")

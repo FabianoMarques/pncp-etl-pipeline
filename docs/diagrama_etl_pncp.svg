@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900">
+<defs>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+    <path d="M2,2 L10,6 L2,10" fill="none" stroke="#334155" stroke-width="1.6"/>
+  </marker>
+  <style>
+    .title { font: 700 32px Arial, sans-serif; fill: #0f172a; }
+    .subtitle { font: 16px Arial, sans-serif; fill: #475569; }
+    .box-title { font: 700 19px Arial, sans-serif; fill: #0f172a; }
+    .body { font: 15px Arial, sans-serif; fill: #334155; }
+    .small { font: 13px Arial, sans-serif; fill: #475569; }
+    .arrow { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    .dashed { stroke-dasharray: 7 6; }
+  </style>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="750" y="58" text-anchor="middle" class="title">Arquitetura e fluxo ETL — PNCP</text>
+<text x="750" y="88" text-anchor="middle" class="subtitle">Orquestração com Apache Airflow • Processamento Python • Persistência PostgreSQL</text>
+
+<rect x="55" y="130" width="1390" height="650" rx="24" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="10 7"/>
+<text x="85" y="166" class="box-title">Apache Airflow 3.3.2 — DAG etl_pncp</text>
+<text x="85" y="192" class="small">Execução manual • schedule=None • catchup=False</text>
+<rect x="100" y="300" width="220" height="150" rx="16" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+<text x="210.0" y="334" text-anchor="middle" class="box-title">Fonte de dados</text>
+<text x="210.0" y="365" text-anchor="middle" class="body">API pública do PNCP</text>
+<text x="210.0" y="389" text-anchor="middle" class="body">/api/consulta/v1/atas</text>
+<rect x="400" y="300" width="220" height="150" rx="16" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+<text x="510.0" y="334" text-anchor="middle" class="box-title">1. Extração</text>
+<text x="510.0" y="365" text-anchor="middle" class="body">Consulta por período</text>
+<text x="510.0" y="389" text-anchor="middle" class="body">Paginação da API</text>
+<rect x="700" y="300" width="220" height="150" rx="16" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+<text x="810.0" y="334" text-anchor="middle" class="box-title">2. Complementação</text>
+<text x="810.0" y="365" text-anchor="middle" class="body">Detalhes das atas</text>
+<text x="810.0" y="389" text-anchor="middle" class="body">Itens e resultados</text>
+<rect x="1000" y="300" width="220" height="150" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1110.0" y="334" text-anchor="middle" class="box-title">3. Transformação</text>
+<text x="1110.0" y="365" text-anchor="middle" class="body">Python + Pandas</text>
+<text x="1110.0" y="389" text-anchor="middle" class="body">DataFrames relacionais</text>
+<rect x="1000" y="545" width="220" height="150" rx="16" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+<text x="1110.0" y="579" text-anchor="middle" class="box-title">4. Validação</text>
+<text x="1110.0" y="610" text-anchor="middle" class="body">Campos e identificadores</text>
+<text x="1110.0" y="634" text-anchor="middle" class="body">Relacionamentos e qualidade</text>
+<rect x="1300" y="545" width="110" height="150" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="1355.0" y="579" text-anchor="middle" class="box-title">5. Carga</text>
+<text x="1355.0" y="610" text-anchor="middle" class="body">PostgreSQL</text>
+<path d="M320 375 H390" class="arrow"/>
+<path d="M620 375 H690" class="arrow"/>
+<path d="M920 375 H990" class="arrow"/>
+<path d="M1110 450 V535" class="arrow"/>
+<path d="M1220 620 H1290" class="arrow"/>
+<text x="210" y="270" text-anchor="middle" class="small">HTTPS</text>
+<rect x="1280" y="265" width="135" height="190" rx="14" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="1347" y="295" text-anchor="middle" class="box-title" font-size="16">Destino</text>
+<text x="1347" y="328" text-anchor="middle" class="small">stg_pncp_</text>
+<text x="1347" y="347" text-anchor="middle" class="small">registros</text>
+<text x="1347" y="380" text-anchor="middle" class="small">pncp_atas</text>
+<text x="1347" y="402" text-anchor="middle" class="small">pncp_itens</text>
+<text x="1347" y="424" text-anchor="middle" class="small">pncp_resultados</text>
+<path d="M1355 545 V465" class="arrow"/>
+<rect x="400" y="545" width="520" height="150" rx="16" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="660" y="579" text-anchor="middle" class="box-title">Relatórios e arquivos</text>
+<text x="660" y="614" text-anchor="middle" class="body">JSON extraído • relatório de qualidade CSV</text>
+<text x="660" y="640" text-anchor="middle" class="body">Relatórios de registros inválidos</text>
+<text x="660" y="670" text-anchor="middle" class="small">Diretório dados/</text>
+<path d="M810 450 V520 H660 V535" class="arrow dashed"/>
+<text x="750" y="825" text-anchor="middle" class="subtitle">Fluxo: API PNCP → extração → complementação → transformação → validação → carga PostgreSQL</text>
+<text x="750" y="852" text-anchor="middle" class="small">Os relatórios são produzidos durante o processamento para apoiar a auditoria e a análise da qualidade dos dados.</text>
+</svg>
