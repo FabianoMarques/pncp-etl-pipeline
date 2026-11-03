@@ -212,3 +212,19 @@ A consulta utiliza, entre outros, os parâmetros `dataInicial`, `dataFinal`, `pa
 - A staging preserva o JSON de origem e o histórico por coleta.
 - Os dados inválidos devem ser registrados em relatórios para permitir análise, em vez de serem descartados silenciosamente.
 - Ajuste os nomes de serviços/hosts e credenciais de acordo com o `docker-compose.yaml` e o ambiente local.
+
+
+## 🎥 Demonstração do Projeto
+
+Para apresentar o funcionamento do pipeline ETL desenvolvido para o PNCP, disponibilizei um vídeo demonstrativo com a execução e explicação das principais etapas do projeto.
+
+A demonstração contempla:
+
+* Extração de dados pela API pública do PNCP.
+* Transformação e estruturação dos dados com Python e Pandas.
+* Validação da qualidade dos dados e identificação de inconsistências.
+* Persistência dos dados no PostgreSQL.
+* Orquestração e execução do pipeline com Apache Airflow.
+* Execução em ambiente Docker.
+
+▶️ **[ASSISTIR À DEMONSTRAÇÃO DO PROJETO NO YOUTUBE](https://youtu.be/Gxc_aCSWMHI)**
